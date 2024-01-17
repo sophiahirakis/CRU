@@ -1,16 +1,32 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python3.10
 
 from numpy import *
 import sys
 import matplotlib.pyplot as plt
+from datetime import datetime
 
-print('      MCell L-Type Calcium Variable Rate generation script\n')
+
+now = datetime.now()
+
+print('')
+print('')
+print('                      ', now.strftime("%B-%d-%Y %H:%M:%S"))
+print('')
+print('')
+print('      MCell L-Type Calcium Variable LTCC Rate generation script\n')
 print('                          Salk Institute')
-print('                                2018')
-print('                           Sophia P. Hirakis')
-print('                     Computational Neurobiology Lab')
-print('         Advised by Thomas M. Bartol and Terrence J. Sejnowski\n')
-print('\n This script is used to generate the variable rates for the \n Kinetic properties of the Cardiac L-Type Calcium Channel model described by \nJ.L. Greenstein and R.L.Winslow BiophysJ Vol 83 (2002) 2918-2945. \n')
+print('                               2024')
+print('                     Dr. Sophia P. Hirakis, Ph.D.')
+print('                    Computational Neurobiology Lab')
+print('     Advised by Drs. Thomas M. Bartol and Terrence J. Sejnowski\n')
+print('')
+print('')
+print('\n       This script is used to generate the variable rates for the \n kinetic properties of the Cardiac L-Type Calcium Channel model described by \n     J.L. Greenstein and R.L.Winslow BiophysJ Vol 83 (2002) 2918-2945. \n')
+print('')
+print('')
+
+start_time = datetime.now()
+
 
 if (len(sys.argv)<2):
     print('Usage:  ./script_name.py action_potential.dat \n')
@@ -20,6 +36,7 @@ if (len(sys.argv)<2):
     exit(1)
 
 input_file = sys.argv[1]
+print('Processing your input file: ' + input_file)
 input_data = loadtxt(input_file)
 ### Data processing ###
 
@@ -150,3 +167,23 @@ k_J_out = (Na_mmol/2)*(P_CaL_L*4*vm*F*exp(2*vm*F/(R*T)))/(R*T*(exp((2*vm*F)/(R*T
 z = hstack([xaxis,k_J_out])
 savetxt('hva_k_IV_out.dat',z,fmt='%.15g')
 
+print('')
+print('')
+print('')
+
+
+# Calculate the time elapsed
+end_time = datetime.now()
+time_elapsed = end_time - start_time
+seconds = time_elapsed.total_seconds()
+
+# Print the runtime in seconds
+print("Script runtime:", seconds, "s")
+
+
+
+print('')
+print('')
+print('')
+print('')
+print('')
